@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zodiacal Releasing Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px; }
+        .container { background: white; max-width: 600px; margin: auto; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        label { display: block; margin-top: 15px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 20px; padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>ZR + Firdaria + Profections</h2>
+    <form method="POST">
+        <label for="year">Year:</label>
+        <input type="number" name="year" required>
+
+        <label for="month">Month:</label>
+        <input type="number" name="month" required>
+
+        <label for="day">Day:</label>
+        <input type="number" name="day" required>
+
+        <label for="hour">Hour (0-23):</label>
+        <input type="number" name="hour" required>
+
+        <label for="minute">Minute (0-59):</label>
+        <input type="number" name="minute" required>
+
+        <label for="lat">Latitude (e.g., 37.5665):</label>
+        <input type="text" name="lat" required>
+
+        <label for="lon">Longitude (e.g., 126.9780):</label>
+        <input type="text" name="lon" required>
+
+        <label for="tz">Timezone (e.g., 9):</label>
+        <input type="text" name="tz" required>
+
+        <button type="submit">Generate Excel File</button>
+    </form>
+</div>
+</body>
+</html>

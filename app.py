@@ -1,63 +1,51 @@
+# app.py (Flask version using pyswisseph)
+
 from flask import Flask, render_template, request, send_file
 import pandas as pd
-import swisseph as swe
-from datetime import datetime, timedelta
-from io import BytesIO
-from openpyxl import load_workbook
-from openpyxl.styles import PatternFill
+import pyswisseph as swe
+import os
+from datetime import datetime
 
 app = Flask(__name__)
 
-# 여기부터는 이전에 작성했던 ZR/Firdaria/Profection 코드 블록을 그대로 넣을 수 있어
-# 코드를 너무 길게 하면 여기 한 번에 못 넣으니, 구조를 나눠서 템플릿처럼 만들자
-
-@app.route("/", methods=["GET", "POST"])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == "POST":
+    if request.method == 'POST':
         try:
-            y = int(request.form['year'])
-            m = int(request.form['month'])
-            d = int(request.form['day'])
-            H = int(request.form['hour'])
-            mi = int(request.form['minute'])
+            # Parse form data
+            year = int(request.form['year'])
+            month = int(request.form['month'])
+            day = int(request.form['day'])
+            hour = int(request.form['hour'])
+            minute = int(request.form['minute'])
             lat = float(request.form['lat'])
             lon = float(request.form['lon'])
             tz = float(request.form['tz'])
 
-            # --- 여기에 생년월일 기준 ZR + Firdaria + Profection 계산 함수 호출 ---
-            # df = generate_astrology_table(y, m, d, H, mi, lat, lon, tz)
-
-            # --- 예시 dummy 데이터프레임 ---
-            df = pd.DataFrame({
-                'Date': ['1992-06-01'],
+            # Placeholder response file generation (simulate actual logic)
+            data = {
+                'Date': [f"{year}-{month:02}-{day:02}"],
                 'Age': [0],
-                'Fortune_L1': ['♌'],
-                'Fortune_L2': ['♌'],
-                'Fortune_L3': ['♌'],
-                'Spirit_L1': ['♌'],
-                'Spirit_L2': ['♌'],
-                'Spirit_L3': ['♌'],
-                'Firdaria_Main': ['☉'],
-                'Firdaria_Sub': ['☽'],
-                'Profection_Sign': ['♌'],
-                'Uranus': ['♒'],
-                'Neptune': ['♓'],
-                'Pluto': ['♑'],
-            })
+                'Fortune L1': ['Leo ♌'],
+                'Spirit L1': ['Virgo ♍'],
+                'Firdaria Major': ['☉ Sun'],
+                'Firdaria Minor': ['☽ Moon'],
+                'Profection Sign': ['Cancer ♋'],
+                'Uranus': ['Capricorn ♑'],
+                'Neptune': ['Capricorn ♑'],
+                'Pluto': ['Scorpio ♏']
+            }
+            df = pd.DataFrame(data)
+            file_path = "output.xlsx"
+            df.to_excel(file_path, index=False)
 
-            # Excel 파일 생성
-            output = BytesIO()
-            df.to_excel(output, index=False)
-            output.seek(0)
-            return send_file(output, as_attachment=True, download_name="astro_timeline.xlsx")
+            return send_file(file_path, as_attachment=True)
 
         except Exception as e:
-            return f"<h3>Error occurred: {str(e)}</h3>"
+            return f"An error occurred: {str(e)}"
 
-    return render_template("index.html")
+    return render_template('index.html')
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
-
+    app.run(debug=False, host="0.0.0.0", port=port)

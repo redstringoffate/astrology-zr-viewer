@@ -1,5 +1,4 @@
---no-binary :all:
-pyswisseph
+pyswisseph==2.10.3.2 --only-binary :all:
 flask
 pandas
 openpyxl

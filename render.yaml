@@ -1,8 +1,9 @@
 services:
   - type: web
-    name: astrology-zr-viewer
+    name: astro-zr-viewer
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    runtime: python-3.11.9
     autoDeploy: true

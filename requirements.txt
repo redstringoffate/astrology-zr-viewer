@@ -1,4 +1,5 @@
+--no-binary :all:
+pyswisseph
 flask
 pandas
 openpyxl
-pyswisseph

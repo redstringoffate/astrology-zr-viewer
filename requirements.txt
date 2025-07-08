@@ -1,5 +1,5 @@
-pyswisseph==2.10.3.2 --only-binary :all:
+--only-binary :all:
+pyswisseph==2.10.3.2
 flask
 pandas
 openpyxl
-
